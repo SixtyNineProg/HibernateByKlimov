@@ -30,10 +30,10 @@ public class UserService{
     }
 
     public Auto findAutoById(int id) {
-        return null;
+        return userDao.findAutoById(id);
     }
 
     public List<User> findAll() {
-        return null;
+        return userDao.findAll();
     }
 }
