@@ -1,5 +1,6 @@
 package dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,9 +11,9 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "EMPLOYEE")
+@AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

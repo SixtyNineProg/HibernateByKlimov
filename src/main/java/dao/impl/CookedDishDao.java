@@ -4,19 +4,13 @@ import dao.Dao;
 import dto.CookedDish;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import utils.HibernateSessionFactoryUtil;
 
 public class CookedDishDao implements Dao<CookedDish,Integer> {
 
-    private final SessionFactory factory;
-
-    public CookedDishDao(SessionFactory factory) {
-        this.factory = factory;
-    }
-
     @Override
     public void add(CookedDish cookedDish) {
-        try (Session session = factory.openSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(cookedDish);
             session.getTransaction().commit();
@@ -25,7 +19,7 @@ public class CookedDishDao implements Dao<CookedDish,Integer> {
 
     @Override
     public CookedDish findById(Integer id) {
-        try (Session session = factory.openSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             CookedDish dish = session.get(CookedDish.class, id);
             if (dish != null){
                 Hibernate.initialize(dish.getEmployee());
@@ -37,7 +31,7 @@ public class CookedDishDao implements Dao<CookedDish,Integer> {
 
     @Override
     public void update(CookedDish cookedDish) {
-        try (Session session = factory.openSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.update(cookedDish);
             session.getTransaction().commit();
@@ -46,7 +40,7 @@ public class CookedDishDao implements Dao<CookedDish,Integer> {
 
     @Override
     public void delete(CookedDish cookedDish) {
-        try (Session session = factory.openSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.delete(cookedDish);
             session.getTransaction().commit();
