@@ -1,6 +1,7 @@
 package dto;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "autos")
@@ -13,7 +14,7 @@ public class Auto {
     @Column (name = "model")
     private String model;
 
-    //можно не указывать Column name, если оно совпадает с названием столбца в таблице
+    @Column (name = "color")
     private String color;
 
 
@@ -60,5 +61,21 @@ public class Auto {
     @Override
     public String toString() {
         return color + " " + model;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Auto auto = (Auto) o;
+        return id == auto.id &&
+                Objects.equals(model, auto.model) &&
+                Objects.equals(color, auto.color) &&
+                Objects.equals(user, auto.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, model, color, user);
     }
 }
